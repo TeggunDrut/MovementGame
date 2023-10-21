@@ -36,7 +36,10 @@ class Player {
         for(const obj of objects) {
             let col = colCheck(this, obj);
 
-            if(col === "l" || col === "r") {
+            if(col === "l" && this.velocity.x < 0) {
+                this.velocity.x = 0;
+            }
+            if(col === "r" && this.velocity.x > 0) {
                 this.velocity.x = 0;
             }
             

@@ -4,7 +4,17 @@ let objects = [];
 function init() {
     p = new Player(new Vector(0, 0));
     objects.push(new Platform(
-            new Vector(200, height - 90), 
+            new Vector(200, height - 30), 
+            new Vector(30, 30)
+        )
+    );
+    objects.push(new Platform(
+            new Vector(400, height - 30), 
+            new Vector(30, 30)
+        )
+    );
+    objects.push(new Platform(
+            new Vector(600, height - 30), 
             new Vector(30, 30)
         )
     );
