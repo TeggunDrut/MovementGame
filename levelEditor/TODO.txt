@@ -1,0 +1,16 @@
+Button to save a file in the format
+
+Button to load a file
+
+
+
+
+
+
+Be able to click items and bring to focus 
+-   Will update inputs
+
+Button to remove from canvas
+
+Hallogram of item when inputting numbers
+Click into place, drag items

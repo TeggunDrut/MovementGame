@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Movement Game Level Editor</title>
+        <style>
+            html, body {
+                margin: 0;
+            }
+
+            #canvas {
+                max-width: 100%;
+            }
+
+            #controls {
+                background: gray;
+                height: 200px;
+                width: 100%;
+            }
+
+
+            .inputContainer {
+                display: flex;
+            }
+
+            .inputField {
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+            }
+
+            .inputField input {
+                max-width: 200px;
+            }
+
+            .actionContainer {
+                gap: 8px;
+                height: 100px;
+            }
+
+            .actionButton {
+                border-color: rgba(0, 0, 0, 0);
+                border-radius: 8px;
+                flex: 1;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+        </style>
+        <script src="main.js"></script>
+    </head>
+    <body onLoad="gameLoaded()">
+        <canvas id="canvas"></canvas>
+        <div id="controls">
+            <div class="inputContainer">
+                <div class="inputField">
+                    <div>
+                        X
+                    </div>
+                    <input id="positionX" type="number" placeholder="0" value="10" />
+                </div>
+                <div class="inputField">
+                    <div>
+                        Y
+                    </div>
+                    <input id="positionY" type="number" placeholder="0" value="10" />
+                </div>
+                <div class="inputField">
+                    <div>
+                        Height
+                    </div>
+                    <input id="height" type="number" placeholder="0" value="10" />
+                </div>
+                <div class="inputField">
+                    <div>
+                        Width
+                    </div>
+                    <input id="width" type="number" placeholder="0" value="10" />
+                </div>
+                <div class="inputField actionContainer">
+                    <button class="actionButton" onClick="addElement()">
+                        Add
+                    </button>
+                    <button class="actionButton" onClick="saveLevel()">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
