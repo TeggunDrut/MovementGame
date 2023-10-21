@@ -42,3 +42,9 @@ function colCheck(shapeA, shapeB) {
     }
     return colDir;
 }
+
+function wait(ms) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+    });
+}
