@@ -1,2 +1,2 @@
-# MovementGame
-Cool Movement Game
+# Movement Game
+
