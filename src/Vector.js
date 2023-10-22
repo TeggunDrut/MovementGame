@@ -23,6 +23,6 @@ class Vector {
         return Math.sqrt(this.x * this.x + this.y * this.y);
     }
     copy() {
-        return this;
+        return new Vector(this.x, this.y);
     }
 }

@@ -14,7 +14,6 @@ class Timer {
         this.time = this.startTimeMs;
         this.interval = setInterval(() => {
             this.time++;
-            console.log(this.time, this.endTimeMs);
             this.callback();
             if (this.time >= this.endTimeMs) {
                 this.endCallback();
