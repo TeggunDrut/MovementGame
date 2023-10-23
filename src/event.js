@@ -5,7 +5,6 @@ document.addEventListener("keydown", (e) => {
         e.preventDefault();
     }
     keys[e.key.toLowerCase()] = true;
-    // console.log(e.key);
 });
 document.addEventListener("keyup", (e) => {
     if (e.key.toLowerCase() === "shift") {

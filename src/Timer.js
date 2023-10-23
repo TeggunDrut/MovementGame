@@ -1,5 +1,5 @@
 class Timer {
-    constructor(startTimeMs, endTimeMs, callback=()=>{console.log('ticking');}, endCallback=()=>{'done'}, autoStart=true) {
+    constructor(startTimeMs, endTimeMs, callback=()=>{console.log('ticking');}, endCallback=()=>{console.log('done')}, autoStart=true) {
         this.startTimeMs = startTimeMs;
         this.endTimeMs = endTimeMs;
         this.callback = callback;

@@ -152,9 +152,7 @@ class Player {
         }
     }
     checkCollision() {
-        // console.log(this.position.y + this.size.y, height);
         if (this.position.y + this.size.y > height) {
-            // this.velocity.y *= -0.2;
             this.position.y = height - this.size.y;
             if (!this.jumping) {
                 this.velocity.y = 0;
