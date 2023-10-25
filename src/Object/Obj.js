@@ -9,10 +9,18 @@ class Obj {
     }
     draw() {
         ctx.save();
-        ctx.translate(this.position.x + this.size.x / 2, this.position.y + this.size.y / 2);
+        ctx.translate(
+            (this.position.x * cellSize.x) + this.size.x * cellSize.x,
+            (this.position.y * cellSize.y) + this.size.y * cellSize.y,
+        );
         ctx.rotate(this.rotation);
         ctx.fillStyle = this.color;
-        ctx.fillRect(-this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
+        ctx.fillRect(
+            -this.size.x * cellSize.x,
+            -this.size.y * cellSize.y,
+            this.size.x * cellSize.x,
+            this.size.y * cellSize.y
+        );
         ctx.restore();
     }
     update(camera) {

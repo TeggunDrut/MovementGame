@@ -4,15 +4,23 @@ let width = (canvas.width = window.innerWidth);
 let height = (canvas.height = window.innerHeight);
 
 const gravity = 0.99;
-const airFriction = 0.95;
-const groundFriction = 0.9;
+let airFriction = 0.95;
+let groundFriction = 0.9;
 
 const keys = {};
 
-let l = new Level(new Vector(window.innerWidth + 400, window.innerHeight), []);
+let level = new Level(
+    new Vector(window.innerWidth + 200, window.innerHeight + 500)
+);
+
+let cellSize = new Vector(level.size.x / (16 * 2), level.size.y / (9 * 2));
+let maxCells = new Vector(
+    level.size.x / (level.size.x / (16 * 2)),
+    level.size.y / (level.size.y / (9 * 2))
+);
 
 let camera = {
-    position: new Vector(0, -200),
+    position: new Vector(0, 500),
     size: new Vector(width, height),
 };
 
@@ -67,13 +75,19 @@ function dist(x1, y1, x2, y2) {
     return Math.sqrt((x2 -= x1) * x2 + (y2 -= y1) * y2);
 }
 
-
 function rotatePoint(point, center, angle) {
-    angle = (angle ) * (Math.PI/180); // Convert to radians
-    var rotatedX = Math.cos(angle) * (point.x - center.x) - Math.sin(angle) * (point.y-center.y) + center.x;
-    var rotatedY = Math.sin(angle) * (point.x - center.x) + Math.cos(angle) * (point.y - center.y) + center.y;
+    angle = angle * (Math.PI / 180); // Convert to radians
+    var rotatedX =
+        Math.cos(angle) * (point.x - center.x) -
+        Math.sin(angle) * (point.y - center.y) +
+        center.x;
+    var rotatedY =
+        Math.sin(angle) * (point.x - center.x) +
+        Math.cos(angle) * (point.y - center.y) +
+        center.y;
     return new Vector(rotatedX, rotatedY);
 }
+
 // function rotatePoint(x1, y1, c1, c2, angle) {
 //     angle = angle * (Math.PI / 180); // Convert to radians
 //     var rotatedX =

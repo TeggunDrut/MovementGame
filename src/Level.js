@@ -1,5 +1,5 @@
 class Level {
-    constructor(size, objects) {
+    constructor(size, objects=[]) {
         this.size = size;
         if (this.objects == undefined) this.objects = [];
         else this.objects = objects;
@@ -8,7 +8,6 @@ class Level {
     }
     draw() {
         if(this.drawGrid) {
-            // draw grid
             ctx.strokeStyle = "gray";
             ctx.lineWidth = 1;
             for (let x = 0; x < this.size.x; x += 50) {

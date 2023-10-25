@@ -3,8 +3,8 @@ class Player {
         this.oposition = spawnPos.copy();
         this.position = spawnPos.copy();
         this.velocity = new Vector(10, 0);
-        this.size = new Vector(9 * 3, 16 * 3);
-        this.osize = new Vector(9 * 3, 16 * 3);
+        this.size = new Vector(width/32, height / 9);
+        this.osize = new Vector(width/32, height / 18);
 
         this.controlsEnables = true;
 
@@ -47,6 +47,8 @@ class Player {
             ctx.fillRect(this.position.x - 5, this.position.y + 5, 10, 10);
     }
     async update() {
+        // this.size.x = cellSize.x;
+        // this.size.y = cellSize.y * 2;
         this.velocity.y += gravity;
         if (!this.grounded) this.velocity.x *= airFriction;
         else this.velocity.x *= groundFriction;
@@ -80,12 +82,19 @@ class Player {
                 if (this.velocity.x < 0) this.velocity.x -= this.slidePower;
                 else this.velocity.x += this.slidePower;
                 this.canSlide = false;
-
+                groundFriction = 0.94;
                 let intervalDown =
                     (this.osize.y - this.osize.y * 0.75) / this.slideDuration;
-                let downTimer = new Timer(0, this.slideDuration, () => {
-                    this.size.y -= intervalDown;
-                });
+                let downTimer = new Timer(
+                    0,
+                    this.slideDuration,
+                    () => {
+                        this.size.y -= intervalDown;
+                    },
+                    () => {
+                        groundFriction = 0.9;
+                    }
+                );
             }
         }
         if (keys["shift"] == false && this.sliding) {
@@ -137,15 +146,21 @@ class Player {
         }
 
         this.checkCollision();
-        for (const obj of l.objects) {
+        for (const obj of level.objects) {
             let col;
-
+            let newObj = {
+                position: new Vector(
+                    obj.position.x * cellSize.x,
+                    obj.position.y * cellSize.y
+                ),
+                size: new Vector(
+                    obj.size.x * cellSize.x,
+                    obj.size.y * cellSize.y
+                ),
+            };
             if (obj instanceof Slope) continue;
-            if (obj instanceof Platform) col = colCheck(this, obj);
-            else if (obj instanceof JumpPad) {
-                col = colCheck(this, obj, false);
-            } else col = colCheck(this, obj);
-
+            if (obj instanceof Platform) col = colCheck(this, newObj);
+            if (obj instanceof JumpPad) {col = colCheck(this, newObj, false);}
             if (col === null) continue;
 
             if (obj instanceof JumpPad) {
@@ -218,18 +233,26 @@ class Player {
         if (camera.position.x < 0) {
             camera.position.x = 0;
         }
-        if (camera.position.x > l.size.x - camera.size.x) {
-            camera.position.x = l.size.x - camera.size.x;
+        if (camera.position.x > level.size.x - camera.size.x) {
+            camera.position.x = level.size.x - camera.size.x;
         }
     }
     checkCollision() {
-        if (this.position.y + this.size.y > height) {
-            this.position.y = height - this.size.y;
-            if (!this.jumping) {
-                this.velocity.y = 0;
-            }
-            this.jumping = false;
-            this.grounded = true;
+        // if (this.position.y + this.size.y > height) {
+        //     this.position.y = height - this.size.y;
+        //     if (!this.jumping) {
+        //         this.velocity.y = 0;
+        //     }
+        //     this.jumping = false;
+        //     this.grounded = true;
+        // }
+        if (this.position.x < 0) {
+            this.velocity.x = 0;
+            this.position.x = 0;
+        }
+        if (this.position.x + this.size.x > level.size.x) {
+            this.velocity.x = 0;
+            this.position.x = level.size.x - this.size.x;
         }
     }
 }

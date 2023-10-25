@@ -1,40 +1,26 @@
 let p;
 
-function makePlatform(x, y, w, h) {
-    l.add(new Platform(new Vector(x, y), new Vector(w, h)));
+function makeObject(type, x, y, w, h, force=10, orientation=0, rotatePad=false) {
+    switch(type) {
+        case Platform   :
+            level.add(new Platform(new Vector(x, y), new Vector(w, h), 0));
+            break;
+        case JumpPad:
+            level.add(new JumpPad(new Vector(x, y), new Vector(w, h), force, orientation, rotatePad));
+            break;
+    }
 }
 
 function init() {
     p = new Player(new Vector(0, 0));
-    l.add(new Platform(new Vector(200, height - 30), new Vector(300, 30)));
-    l.add(new Platform(new Vector(500, height - 60), new Vector(600, 60)));
-    makePlatform(1500, height - 90, 600, 90);
-    l.add(
-        new JumpPad(new Vector(100, height - 5), new Vector(30, 10), 0.5, 20, 0.5, false)
-    );
-    l.add(
-        new JumpPad(
-            new Vector(2230, height - 5),
-            new Vector(30, 10),
-            Math.PI / 2,
-            20,
-            0
-        )
-    );
-    l.add(
-        new JumpPad(
-            new Vector(1310, height - 5),
-            new Vector(30, 10),
-            0,
-            20,
-            0
-        )
-    );
-
-    // l.add(new Platform(new Vector(700, height - 100), new Vector(30, 60)));
-    // l.add(
-    //     new JumpPad(new Vector(610, height - 120), new Vector(30, 10), 0, 20, 0)
-    // );
+    makeObject(Platform, 10, 20, 10, 1);
+    makeObject(Platform, 20, 16, 5, 2);
+    makeObject(JumpPad, 1, 17, 1, 0.25, 20, 0, false);
+    makeObject(JumpPad, 2, 14, 1, 0.25, 20, 0, false);
+    makeObject(JumpPad, 1, 11, 1, 0.25, 20, 0, false);
+    
+    // make floor so player doesnt fall forever
+    makeObject(Platform, 0, maxCells.y, maxCells.x, 1);
 
     requestAnimationFrame(render);
 }
@@ -42,34 +28,20 @@ function render() {
     requestAnimationFrame(render);
     ctx.save();
     ctx.translate(-camera.position.x, -camera.position.y);
-    ctx.clearRect(0, 0, l.size.x, l.size.y);
+    ctx.clearRect(0, 0, level.size.x, level.size.y);
 
-    l.update();
-    l.draw();
+    level.update();
+    level.draw();
 
     p.update();
     p.draw();
 
-    // ctx.strokeStyle = "red";
-    // ctx.lineWidth = 2;
-    // ctx.strokeRect(
-    //     camera.position.x,
-    //     camera.position.y,
-    //     camera.size.x,
-    //     camera.size.y
-    // );
     ctx.restore();
 
-    // keep the player in the center while the camera moves
+    camera.position.y = p.position.y - camera.size.y / 2;
 
-    // if (p.position.y > camera.position.y + camera.size.y / 2) {
-    //     camera.position.y = p.position.y - camera.size.y / 2;
-    // }
-    // if (p.position.y < camera.position.y + camera.size.y / 2) {
-    //     camera.position.y = p.position.y - camera.size.y / 2;
-    // }
     if (camera.position.y < 0) camera.position.y = 0;
 
-    if (camera.position.y > l.size.y - camera.size.y)
-        camera.position.y = l.size.y - camera.size.y;
+    if (camera.position.y > level.size.y - camera.size.y)
+        camera.position.y = level.size.y - camera.size.y;
 }
