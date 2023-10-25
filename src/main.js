@@ -10,13 +10,26 @@ function init() {
     l.add(new Platform(new Vector(500, height - 60), new Vector(600, 60)));
     makePlatform(1500, height - 90, 600, 90);
     l.add(
-        new JumpPad(new Vector(1310, height - 5), new Vector(30, 10), 0, 20, 0)
+        new JumpPad(new Vector(100, height - 5), new Vector(30, 10), 0.5, 20, 0.5, false)
     );
     l.add(
-        
-        new JumpPad(new Vector(2230, height - 5), new Vector(30, 10), Math.PI/2, 20, 0)
+        new JumpPad(
+            new Vector(2230, height - 5),
+            new Vector(30, 10),
+            Math.PI / 2,
+            20,
+            0
+        )
     );
-    
+    l.add(
+        new JumpPad(
+            new Vector(1310, height - 5),
+            new Vector(30, 10),
+            0,
+            20,
+            0
+        )
+    );
 
     // l.add(new Platform(new Vector(700, height - 100), new Vector(30, 60)));
     // l.add(
@@ -30,11 +43,12 @@ function render() {
     ctx.save();
     ctx.translate(-camera.position.x, -camera.position.y);
     ctx.clearRect(0, 0, l.size.x, l.size.y);
-    p.update();
-    p.draw();
 
     l.update();
     l.draw();
+
+    p.update();
+    p.draw();
 
     // ctx.strokeStyle = "red";
     // ctx.lineWidth = 2;
@@ -47,8 +61,6 @@ function render() {
     ctx.restore();
 
     // keep the player in the center while the camera moves
-
-    
 
     // if (p.position.y > camera.position.y + camera.size.y / 2) {
     //     camera.position.y = p.position.y - camera.size.y / 2;

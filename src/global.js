@@ -4,7 +4,8 @@ let width = (canvas.width = window.innerWidth);
 let height = (canvas.height = window.innerHeight);
 
 const gravity = 0.99;
-const friction = 0.9;
+const airFriction = 0.95;
+const groundFriction = 0.9;
 
 const keys = {};
 
@@ -73,18 +74,18 @@ function rotatePoint(point, center, angle) {
     var rotatedY = Math.sin(angle) * (point.x - center.x) + Math.cos(angle) * (point.y - center.y) + center.y;
     return new Vector(rotatedX, rotatedY);
 }
-function rotatePoint(x1, y1, c1, c2, angle) {
-    angle = angle * (Math.PI / 180); // Convert to radians
-    var rotatedX =
-        Math.cos(angle) * (x1 - c1) -
-        Math.sin(angle) * (y1 - c2) +
-        c1;
-    var rotatedY =
-        Math.sin(angle) * (x1 - c1) +
-        Math.cos(angle) * (y1 - c2) +
-        c2;
-    return "(" + rotatedX.toFixed(2) + ", " + rotatedY.toFixed(2) + ")";
-}
+// function rotatePoint(x1, y1, c1, c2, angle) {
+//     angle = angle * (Math.PI / 180); // Convert to radians
+//     var rotatedX =
+//         Math.cos(angle) * (x1 - c1) -
+//         Math.sin(angle) * (y1 - c2) +
+//         c1;
+//     var rotatedY =
+//         Math.sin(angle) * (x1 - c1) +
+//         Math.cos(angle) * (y1 - c2) +
+//         c2;
+//     return "(" + rotatedX.toFixed(2) + ", " + rotatedY.toFixed(2) + ")";
+// }
 
 // /**
 //  * Helper function to determine whether there is an intersection between the two polygons described

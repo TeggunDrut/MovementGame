@@ -16,7 +16,7 @@ class Obj {
         ctx.restore();
     }
     update(camera) {
-        this.position.x = this.oposition.x - camera.position.x;
+        // this.position.x = this.oposition.x - camera.position.x;
         // this.position.y = this.oposition.y - camera.y;
     }
 }
