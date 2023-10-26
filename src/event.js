@@ -25,10 +25,10 @@ window.onresize = function () {
 
     level.size.x = width + 200;
     level.size.y = height;
-    cellSize = new Vector(level.size.x / (16 * 2), level.size.y / (9 * 2));
+    cellSize = new Vector(level.size.x / (16 * scale), level.size.y / (9 * scale));
     maxCells = new Vector(
-        level.size.x / (level.size.x / (16 * 2)),
-        level.size.y / (level.size.y / (9 * 2))
+        level.size.x / (level.size.x / (16 * scale)),
+        level.size.y / (level.size.y / (9 * scale))
     );
     camera.size.x = width;
     camera.size.y = height;

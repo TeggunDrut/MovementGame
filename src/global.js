@@ -13,10 +13,12 @@ let level = new Level(
     new Vector(window.innerWidth + 200, window.innerHeight + 500)
 );
 
-let cellSize = new Vector(level.size.x / (16 * 2), level.size.y / (9 * 2));
+const scale = 3;
+
+let cellSize = new Vector(level.size.x / (16 * scale), level.size.y / (9 * scale));
 let maxCells = new Vector(
-    level.size.x / (level.size.x / (16 * 2)),
-    level.size.y / (level.size.y / (9 * 2))
+    level.size.x / (level.size.x / (16 * scale)),
+    level.size.y / (level.size.y / (9 * scale))
 );
 
 let camera = {

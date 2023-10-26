@@ -3,8 +3,8 @@ class Player {
         this.oposition = spawnPos.copy();
         this.position = spawnPos.copy();
         this.velocity = new Vector(10, 0);
-        this.size = new Vector(width/32, height / 9);
-        this.osize = new Vector(width/32, height / 18);
+        this.size = new Vector(32, 9*7);
+        this.osize = new Vector(64, 27);
 
         this.controlsEnables = true;
 
@@ -36,15 +36,16 @@ class Player {
             this.size.x,
             this.size.y
         );
+        let faceSize = 20;
         if (this.facing)
             ctx.fillRect(
-                this.position.x + this.size.x - 5,
-                this.position.y + 5,
-                10,
-                10
+                this.position.x + this.size.x - faceSize/2,
+                this.position.y + faceSize/2,
+                faceSize,
+                faceSize
             );
         else if (!this.facing)
-            ctx.fillRect(this.position.x - 5, this.position.y + 5, 10, 10);
+            ctx.fillRect(this.position.x - faceSize/2, this.position.y + faceSize/2, 20, 20);
     }
     async update() {
         // this.size.x = cellSize.x;

@@ -2,7 +2,7 @@ let p;
 
 function makeObject(type, x, y, w, h, force=10, orientation=0, rotatePad=false) {
     switch(type) {
-        case Platform   :
+        case Platform:
             level.add(new Platform(new Vector(x, y), new Vector(w, h), 0));
             break;
         case JumpPad:
@@ -13,11 +13,11 @@ function makeObject(type, x, y, w, h, force=10, orientation=0, rotatePad=false) 
 
 function init() {
     p = new Player(new Vector(0, 0));
-    makeObject(Platform, 10, 20, 10, 1);
-    makeObject(Platform, 20, 16, 5, 2);
-    makeObject(JumpPad, 1, 17, 1, 0.25, 20, 0, false);
-    makeObject(JumpPad, 2, 14, 1, 0.25, 20, 0, false);
-    makeObject(JumpPad, 1, 11, 1, 0.25, 20, 0, false);
+    makeObject(Platform, 10, 26, 10, 1);
+    makeObject(Platform, 20, 25, 5, 2);
+    makeObject(JumpPad, 1, 25, 1, 0.25, 20, 0, false);
+    makeObject(JumpPad, 2, 20, 1, 0.25, 20, 0, false);
+    makeObject(JumpPad, 1, 15, 1, 0.25, 20, 0, false);
     
     // make floor so player doesnt fall forever
     makeObject(Platform, 0, maxCells.y, maxCells.x, 1);
